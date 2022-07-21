@@ -46,7 +46,7 @@ jobs:
       - name: Create tarball
         run: |
           cd /Users/runner/.mint/packages/
-          tar cJf github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz github.com_yonaskolb_SwagGen/build/${{ github.event.inputs.PACKAGE_VERSION }} 
+          tar cJf github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.$(arch).tar.xz github.com_yonaskolb_SwagGen/build/${{ github.event.inputs.PACKAGE_VERSION }} 
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
@@ -54,7 +54,7 @@ jobs:
           # Artifact name
           # name: # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
+          path: /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.$(arch).tar.xz
           # The desired behavior if no files are found using the provided path.
           
           
@@ -63,5 +63,5 @@ jobs:
           git clone https://github.com/mattruzzi/swiftbrew-release-test.git
           cd swiftbrew-release-test
           echo Creating tag v0.0.0-${{ github.event.inputs.PACKAGE_GIT_URL }}-${{ github.event.inputs.PACKAGE_VERSION }}
-          ghr --token ${{ secrets.RELEASE_TOKEN }} github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
+          ghr --token ${{ secrets.RELEASE_TOKEN }} github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.$(arch) /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
 
