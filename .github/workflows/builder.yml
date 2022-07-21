@@ -25,7 +25,6 @@ on:
         
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: macos-12
@@ -44,8 +43,7 @@ jobs:
       - name: Install package with mint
         run: mint install --verbose ${{ github.event.inputs.PACKAGE_GIT_URL }}@${{ github.event.inputs.PACKAGE_VERSION }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Create tarball
         run: |
           cd /Users/runner/.mint/packages/
           tar cJf github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz github.com_yonaskolb_SwagGen/build/${{ github.event.inputs.PACKAGE_VERSION }} 
@@ -60,7 +58,7 @@ jobs:
           # The desired behavior if no files are found using the provided path.
           
           
-      - name: "Release"
+      - name: Upload as GitHub release
         run: |
           git clone https://github.com/mattruzzi/swiftbrew-release-test.git
           cd swiftbrew-release-test
