@@ -70,5 +70,5 @@ jobs:
         run: |
           git clone https://github.com/mattruzzi/swiftbrew-release-test.git
           cd swiftbrew-release-test
-          ghr --token $GITHUB_TOKEN v0.0.0-${{ github.event.inputs.PACKAGE_GIT_URL }}-${{ github.event.inputs.PACKAGE_VERSION }} /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
+          ghr --token ${{ secrets.GITHUB_TOKEN }} v0.0.0-${{ github.event.inputs.PACKAGE_GIT_URL }}-${{ github.event.inputs.PACKAGE_VERSION }} /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
 
