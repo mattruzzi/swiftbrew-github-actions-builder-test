@@ -12,7 +12,23 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+    # Inputs the workflow accepts.
+    inputs:
+      PACKAGE_GIT_URL:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'https://github.com/yonaskolb/SwagGen.git'
+        # Input has to be provided for the workflow to run
+#         required: true
+      PACKAGE_VERSION:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: '4.2.0'
+        # Input has to be provided for the workflow to run
+#         required: true
+        
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -29,13 +45,13 @@ jobs:
         run: brew install mint
         
       - name: Install package with mint
-        run: mint install --verbose https://github.com/yonaskolb/SwagGen.git@4.2.0
+        run: mint install --verbose ${{ github.event.inputs.PACKAGE_GIT_URL }}@${{ github.event.inputs.PACKAGE_VERSION }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           cd /Users/runner/.mint/packages/
-          tar cJf github.com_yonaskolb_SwagGen-4.2.0.monterey.tar.xz github.com_yonaskolb_SwagGen/build/4.2.0 
+          tar cJf github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz github.com_yonaskolb_SwagGen/build/${{ github.event.inputs.PACKAGE_VERSION }} 
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
@@ -43,5 +59,5 @@ jobs:
           # Artifact name
           # name: # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-4.2.0.monterey.tar.xz
+          path: /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
           # The desired behavior if no files are found using the provided path.
