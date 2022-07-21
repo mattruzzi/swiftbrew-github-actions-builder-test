@@ -25,14 +25,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
       - name: Install mint
         run: brew install mint
+        
+      - name: Install package with mint
+        run: mint install --verbose https://github.com/yonaskolb/SwagGen.git@4.2.0
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          mint install --verbose https://github.com/yonaskolb/SwagGen.git@4.2.0
           cd /Users/runner/.mint/packages/
           tar cJf github.com_yonaskolb_SwagGen-4.2.0.monterey.tar.xz github.com_yonaskolb_SwagGen/build/4.2.0 
           
