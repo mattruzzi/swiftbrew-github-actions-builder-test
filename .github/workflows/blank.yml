@@ -33,7 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           mint install --verbose https://github.com/yonaskolb/SwagGen.git@4.2.0
-          cd /usr/local/lib/mint/packages/
+          cd /Users/runner/.mint/packages/
           tar cJf github.com_yonaskolb_SwagGen-4.2.0.monterey.tar.xz github.com_yonaskolb_SwagGen/build/4.2.0 
           
       - name: Upload a Build Artifact
