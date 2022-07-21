@@ -65,5 +65,5 @@ jobs:
           git clone https://github.com/mattruzzi/swiftbrew-release-test.git
           cd swiftbrew-release-test
           echo Creating tag v0.0.0-${{ github.event.inputs.PACKAGE_GIT_URL }}-${{ github.event.inputs.PACKAGE_VERSION }}
-          ghr --token ${{ secrets.RELEASE_TOKEN }} v0.0.0-github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
+          ghr --token ${{ secrets.RELEASE_TOKEN }} github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey /Users/runner/.mint/packages/github.com_yonaskolb_SwagGen-${{ github.event.inputs.PACKAGE_VERSION }}.monterey.tar.xz
 
